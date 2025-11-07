@@ -174,4 +174,124 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
 });
+// Бургер-меню
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем элементы бургер-меню, если их нет
+    createBurgerMenu();
+    
+    // Инициализация бургер-меню
+    initBurgerMenu();
+    
+    // Обработка ресайза окна
+    window.addEventListener('resize', handleResize);
+    
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', closeMenuOnClickOutside);
+});
+
+function createBurgerMenu() {
+    const nav = document.querySelector('nav .nav-container');
+    if (!nav) return;
+    
+    // Создаем кнопку бургера
+    const burgerButton = document.createElement('button');
+    burgerButton.className = 'burger-menu';
+    burgerButton.innerHTML = `
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    `;
+    
+    // Создаем мобильное меню
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'mobile-menu';
+    
+    // Копируем навигационные ссылки в мобильное меню
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks) {
+        const mobileNavLinks = navLinks.cloneNode(true);
+        mobileNavLinks.className = 'mobile-nav-links';
+        
+        // Добавляем иконки к пунктам меню
+        const icons = [
+            'fas fa-home',
+            'fas fa-concierge-bell',
+            'fas fa-comments',
+            'fas fa-headset',
+            'fas fa-user-tie',
+            'fas fa-sign-in-alt',
+            'fas fa-user-plus'
+        ];
+        
+        mobileNavLinks.querySelectorAll('a').forEach((link, index) => {
+            if (icons[index]) {
+                const icon = document.createElement('i');
+                icon.className = icons[index];
+                link.insertBefore(icon, link.firstChild);
+            }
+        });
+        
+        mobileMenu.appendChild(mobileNavLinks);
+    }
+    
+    // Добавляем элементы в DOM
+    nav.appendChild(burgerButton);
+    document.body.appendChild(mobileMenu);
+}
+
+function initBurgerMenu() {
+    const burgerButton = document.querySelector('.burger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+    
+    if (!burgerButton || !mobileMenu) return;
+    
+    // Обработчик клика по бургеру
+    burgerButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        
+        // Блокировка прокрутки body при открытом меню
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Обработчик клика по ссылкам мобильного меню
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            burgerButton.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+function handleResize() {
+    const burgerButton = document.querySelector('.burger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (window.innerWidth > 1024) {
+        // На широких экранах скрываем мобильное меню
+        if (burgerButton) burgerButton.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function closeMenuOnClickOutside(e) {
+    const burgerButton = document.querySelector('.burger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (!burgerButton || !mobileMenu) return;
+    
+    const isClickInsideMenu = mobileMenu.contains(e.target);
+    const isClickOnBurger = burgerButton.contains(e.target);
+    
+    if (!isClickInsideMenu && !isClickOnBurger && mobileMenu.classList.contains('active')) {
+        burgerButton.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
