@@ -1,0 +1,281 @@
+/* Специфичные стили для страниц аутентификации */
+.auth-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 400px;
+	height: calc(100vh - 70px);
+}
+
+.auth-container {
+	background: white;
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.auth-sidebar {
+	background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+	color: white;
+	padding: 40px;
+	display: flex;
+	align-items: center;
+}
+
+.auth-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.auth-title {
+	color: #2c3e50;
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
+.auth-subtitle {
+	color: #666;
+	font-size: 16px;
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group label {
+	margin-bottom: 8px;
+	color: #555;
+	font-weight: 500;
+}
+
+.form-group input {
+	padding: 12px 15px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 16px;
+	transition: border 0.3s;
+}
+
+.form-group input:focus {
+	border-color: #3498db;
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-hint {
+	font-size: 12px;
+	color: #888;
+	margin-top: 5px;
+}
+
+.password-strength {
+	margin-top: 8px;
+}
+
+.strength-bar {
+	height: 4px;
+	background: #eee;
+	border-radius: 2px;
+	margin-bottom: 5px;
+	transition: all 0.3s ease;
+}
+
+.strength-text {
+	font-size: 12px;
+	color: #888;
+}
+
+.checkbox-group {
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.checkbox-group input {
+	margin-top: 2px;
+}
+
+.checkbox-group label {
+	font-size: 14px;
+	margin-bottom: 0;
+}
+
+.checkbox-group a {
+	color: #3498db;
+	text-decoration: none;
+}
+
+.auth-button {
+	padding: 14px;
+	background: #3498db;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.auth-button:hover {
+	background: #2980b9;
+}
+
+.auth-divider {
+	text-align: center;
+	margin: 20px 0;
+	position: relative;
+}
+
+.auth-divider::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: #eee;
+}
+
+.auth-divider span {
+	background: white;
+	padding: 0 15px;
+	color: #888;
+	font-size: 14px;
+}
+
+.social-auth {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.social-button {
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	background: white;
+	cursor: pointer;
+	transition: all 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 14px;
+}
+
+.social-button:hover {
+	background: #f8f9fa;
+}
+
+.google-button {
+	color: #db4437;
+}
+
+.github-button {
+	color: #333;
+}
+
+.auth-switch {
+	text-align: center;
+	margin-top: 20px;
+	color: #666;
+}
+
+.auth-switch a {
+	color: #3498db;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+/* Боковая панель регистрации */
+.sidebar-content h3 {
+	margin-bottom: 25px;
+	font-size: 22px;
+}
+
+.benefits-list {
+	list-style: none;
+}
+
+.benefits-list li {
+	display: flex;
+	align-items: flex-start;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.benefits-list i {
+	font-size: 20px;
+	color: #3498db;
+	margin-top: 2px;
+}
+
+.benefits-list strong {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.benefits-list span {
+	font-size: 14px;
+	opacity: 0.9;
+}
+
+/* Стили для страницы входа */
+.form-options {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.remember-me {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 14px;
+	color: #666;
+}
+
+.forgot-password {
+	font-size: 14px;
+	color: #3498db;
+	text-decoration: none;
+}
+
+@media (max-width: 768px) {
+	.auth-wrapper {
+		grid-template-columns: 1fr;
+		height: auto;
+	}
+
+	.auth-sidebar {
+		display: none;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.auth-container {
+		padding: 25px;
+	}
+}

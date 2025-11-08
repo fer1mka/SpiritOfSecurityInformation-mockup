@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Техподдержка - SoSI</title>
+	<link rel="icon" type="image/x-icon" href="../favicon.ico">
+	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/support.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	<!-- Навигация -->
+	<nav>
+		<div class="nav-container">
+			<div class="logo">
+				<i class="fas fa-shield-alt"></i>
+				<span>SoSI</span>
+			</div>
+			<ul class="nav-links">
+				<li><a href="../index.html" class="nav-link">Главная</a></li>
+				<li><a href="services.html" class="nav-link">Услуги</a></li>
+				<li><a href="reviews.html" class="nav-link">Отзывы</a></li>
+				<li><a href="support.html" class="nav-link active">Техподдержка</a></li>
+				<li><a href="executor-chat.html" class="nav-link">Чат с исполнителем</a></li>
+				<li><a href="login.html" class="nav-link">Вход</a></li>
+				<li><a href="register.html" class="nav-link">Регистрация</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Страница техподдержки -->
+	<div class="main-content">
+		<div class="page active">
+			<div class="container">
+				<h1 class="page-header">Техническая поддержка</h1>
+				<p class="page-subtitle">Мы всегда готовы помочь вам с любыми вопросами</p>
+
+				<div class="support-options">
+					<div class="support-card">
+						<div class="support-icon">
+							<i class="fas fa-comments"></i>
+						</div>
+						<h3>Онлайн-чат</h3>
+						<p>Мгновенная помощь через чат с нашими специалистами</p>
+						<button class="support-button active" data-tab="chat">Открыть чат</button>
+					</div>
+
+					<div class="support-card">
+						<div class="support-icon">
+							<i class="fas fa-envelope"></i>
+						</div>
+						<h3>Email поддержка</h3>
+						<p>Отправьте нам письмо и получите ответ в течение 24 часов</p>
+						<button class="support-button" data-tab="email">Написать</button>
+					</div>
+
+					<div class="support-card">
+						<div class="support-icon">
+							<i class="fas fa-phone"></i>
+						</div>
+						<h3>Телефон</h3>
+						<p>Позвоните нам для срочной консультации</p>
+						<button class="support-button" data-tab="phone">Позвонить</button>
+					</div>
+				</div>
+
+				<div class="support-content">
+					<!-- Контейнеры чата, email и телефона остаются без изменений -->
+					<div class="chat-container active" id="chat-tab">
+						<!-- Содержимое чата... -->
+					</div>
+
+					<div class="email-container" id="email-tab">
+						<!-- Содержимое email формы... -->
+					</div>
+
+					<div class="phone-container" id="phone-tab">
+						<!-- Содержимое телефона... -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/script.js"></script>
+	<script src="../js/support.js"></script>
+</body>
+
+</html>

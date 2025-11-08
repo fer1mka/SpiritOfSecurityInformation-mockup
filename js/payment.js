@@ -1,33 +1,9 @@
+// Функции для страницы оплаты
 document.addEventListener('DOMContentLoaded', function () {
-	// Получаем параметры из URL
-	const urlParams = new URLSearchParams(window.location.search);
-	const service = urlParams.get('service');
-	const price = urlParams.get('price');
-
-	// Устанавливаем данные услуги
-	if (service && price) {
-		document.getElementById('serviceName').textContent = decodeURIComponent(service);
-		document.getElementById('priceAmount').textContent = formatPrice(price);
-		document.getElementById('summaryPrice').textContent = formatPrice(price);
-		document.getElementById('totalAmount').textContent = formatPrice(price);
-		document.getElementById('payAmount').textContent = formatPrice(price);
-	}
-
-	// Инициализация выбора способа оплаты
 	initPaymentMethods();
-
-	// Инициализация формы оплаты
 	initPaymentForm();
-
-	// Обработка кнопки оплаты
 	initPayButton();
 });
-
-function formatPrice(price) {
-	return new Intl.NumberFormat('ru-RU', {
-		minimumFractionDigits: 0
-	}).format(price) + ' ₽';
-}
 
 function initPaymentMethods() {
 	const methodCards = document.querySelectorAll('.method-card');
@@ -126,7 +102,6 @@ function processPayment() {
 
 	// Имитация процесса оплаты
 	setTimeout(() => {
-		// В реальном приложении здесь был бы запрос к платежному шлюзу
 		const isSuccess = Math.random() > 0.1; // 90% успешных платежей для демонстрации
 
 		if (isSuccess) {
@@ -142,31 +117,30 @@ function processPayment() {
 }
 
 function showSuccessMessage() {
-	// Создаем модальное окно успеха
 	const modal = document.createElement('div');
 	modal.className = 'payment-modal success';
 	modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3>Оплата прошла успешно!</h3>
-            <p>Ваш заказ принят в обработку. В ближайшее время с вами свяжется наш специалист.</p>
-            <div class="order-details">
-                <div class="detail-item">
-                    <span>Номер заказа:</span>
-                    <strong>SO${Date.now().toString().slice(-6)}</strong>
-                </div>
-                <div class="detail-item">
-                    <span>Сумма:</span>
-                    <strong>${document.getElementById('totalAmount').textContent}</strong>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="modal-btn primary" onclick="closeModalAndRedirect()">Отлично!</button>
-            </div>
-        </div>
-    `;
+		<div class="modal-content">
+			<div class="modal-icon">
+				<i class="fas fa-check-circle"></i>
+			</div>
+			<h3>Оплата прошла успешно!</h3>
+			<p>Ваш заказ принят в обработку. В ближайшее время с вами свяжется наш специалист.</p>
+			<div class="order-details">
+				<div class="detail-item">
+					<span>Номер заказа:</span>
+					<strong>SO${Date.now().toString().slice(-6)}</strong>
+				</div>
+				<div class="detail-item">
+					<span>Сумма:</span>
+					<strong>${document.getElementById('totalAmount').textContent}</strong>
+				</div>
+			</div>
+			<div class="modal-actions">
+				<button class="modal-btn primary" onclick="closeModalAndRedirect()">Отлично!</button>
+			</div>
+		</div>
+	`;
 
 	document.body.appendChild(modal);
 	document.body.style.overflow = 'hidden';
@@ -176,17 +150,17 @@ function showErrorMessage() {
 	const modal = document.createElement('div');
 	modal.className = 'payment-modal error';
 	modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-            <h3>Ошибка оплаты</h3>
-            <p>К сожалению, не удалось обработать платеж. Пожалуйста, проверьте данные карты или попробуйте другой способ оплаты.</p>
-            <div class="modal-actions">
-                <button class="modal-btn" onclick="closeModal()">Понятно</button>
-            </div>
-        </div>
-    `;
+		<div class="modal-content">
+			<div class="modal-icon">
+				<i class="fas fa-exclamation-circle"></i>
+			</div>
+			<h3>Ошибка оплаты</h3>
+			<p>К сожалению, не удалось обработать платеж. Пожалуйста, проверьте данные карты или попробуйте другой способ оплаты.</p>
+			<div class="modal-actions">
+				<button class="modal-btn" onclick="closeModal()">Понятно</button>
+			</div>
+		</div>
+	`;
 
 	document.body.appendChild(modal);
 	document.body.style.overflow = 'hidden';
@@ -202,102 +176,102 @@ function closeModal() {
 
 function closeModalAndRedirect() {
 	closeModal();
-	// В реальном приложении здесь был бы redirect на страницу успеха
+	// Перенаправляем на главную страницу
 	setTimeout(() => {
-		alert('В реальном приложении здесь был бы переход на страницу с деталями заказа');
+		window.location.href = '../index.html';
 	}, 500);
 }
 
 // Добавляем стили для модальных окон
 const modalStyles = `
 .payment-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    animation: slideUp 0.3s ease;
+	background: white;
+	padding: 40px;
+	border-radius: 20px;
+	text-align: center;
+	max-width: 400px;
+	width: 90%;
+	animation: slideUp 0.3s ease;
 }
 
 @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+	from { transform: translateY(30px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
+	font-size: 64px;
+	margin-bottom: 20px;
 }
 
 .success .modal-icon {
-    color: #2ecc71;
+	color: #2ecc71;
 }
 
 .error .modal-icon {
-    color: #e74c3c;
+	color: #e74c3c;
 }
 
 .modal-content h3 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 24px;
+	color: #2c3e50;
+	margin-bottom: 15px;
+	font-size: 24px;
 }
 
 .modal-content p {
-    color: #666;
-    margin-bottom: 20px;
-    line-height: 1.5;
+	color: #666;
+	margin-bottom: 20px;
+	line-height: 1.5;
 }
 
 .order-details {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px 0;
+	background: #f8f9fa;
+	padding: 15px;
+	border-radius: 8px;
+	margin: 20px 0;
 }
 
 .detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 0;
 }
 
 .modal-actions {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .modal-btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+	padding: 12px 30px;
+	border: none;
+	border-radius: 8px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
 .modal-btn.primary {
-    background: #3498db;
-    color: white;
+	background: #3498db;
+	color: white;
 }
 
 .modal-btn:hover {
-    transform: translateY(-1px);
+	transform: translateY(-1px);
 }
 `;
 

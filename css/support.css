@@ -1,0 +1,302 @@
+/* Стили для техподдержки */
+.page-subtitle {
+	text-align: center;
+	color: #666;
+	margin-bottom: 40px;
+	font-size: 18px;
+}
+
+.support-options {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 25px;
+	margin-bottom: 40px;
+}
+
+.support-card {
+	background: white;
+	border-radius: 12px;
+	padding: 30px;
+	text-align: center;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+	transition: transform 0.3s;
+}
+
+.support-card:hover {
+	transform: translateY(-5px);
+}
+
+.support-icon {
+	font-size: 48px;
+	color: #3498db;
+	margin-bottom: 20px;
+}
+
+.support-card h3 {
+	margin-bottom: 15px;
+	color: #2c3e50;
+}
+
+.support-card p {
+	color: #666;
+	margin-bottom: 20px;
+	line-height: 1.5;
+}
+
+.support-button {
+	padding: 10px 20px;
+	background: #3498db;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.3s;
+	width: 100%;
+}
+
+.support-button.active {
+	background: #2c3e50;
+}
+
+.support-button:hover {
+	background: #2980b9;
+}
+
+.support-content {
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.chat-container,
+.email-container,
+.phone-container {
+	display: none;
+	height: 500px;
+}
+
+.chat-container.active,
+.email-container.active,
+.phone-container.active {
+	display: block;
+}
+
+.chat-header {
+	background: #3498db;
+	color: white;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chat-info h3 {
+	margin-bottom: 5px;
+}
+
+.chat-status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 14px;
+}
+
+.status-dot {
+	width: 8px;
+	height: 8px;
+	background: #2ecc71;
+	border-radius: 50%;
+}
+
+.status-dot.online {
+	background: #2ecc71;
+}
+
+.chat-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.chat-action-btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: none;
+	color: white;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.chat-action-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.chat-messages {
+	height: 350px;
+	padding: 20px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.message {
+	display: flex;
+	gap: 12px;
+	max-width: 70%;
+}
+
+.message.user {
+	align-self: flex-end;
+	flex-direction: row-reverse;
+}
+
+.message-avatar {
+	width: 35px;
+	height: 35px;
+	background: #3498db;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 14px;
+}
+
+.message-content {
+	background: #f0f0f0;
+	padding: 12px 15px;
+	border-radius: 18px;
+	position: relative;
+}
+
+.message.user .message-content {
+	background: #3498db;
+	color: white;
+}
+
+.message-sender {
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 5px;
+	color: #666;
+}
+
+.message.user .message-sender {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.message-time {
+	font-size: 11px;
+	color: #888;
+	margin-top: 5px;
+	text-align: right;
+}
+
+.message.user .message-time {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-input-container {
+	display: flex;
+	padding: 15px;
+	border-top: 1px solid #eee;
+	gap: 10px;
+}
+
+.chat-input-actions {
+	display: flex;
+	gap: 5px;
+}
+
+.input-action {
+	background: none;
+	border: none;
+	color: #666;
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 4px;
+	transition: background 0.3s;
+}
+
+.input-action:hover {
+	background: #f0f0f0;
+}
+
+.chat-input {
+	flex: 1;
+	padding: 12px 15px;
+	border: 1px solid #ddd;
+	border-radius: 25px;
+	font-size: 14px;
+}
+
+.send-button {
+	background: #3498db;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.send-button:hover {
+	background: #2980b9;
+}
+
+.email-form,
+.phone-info {
+	padding: 30px;
+}
+
+.phone-info {
+	text-align: center;
+}
+
+.phone-icon {
+	font-size: 64px;
+	color: #3498db;
+	margin-bottom: 20px;
+}
+
+.phone-number {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2c3e50;
+	margin-bottom: 20px;
+}
+
+.phone-hours {
+	margin-bottom: 20px;
+	color: #666;
+}
+
+.phone-notes {
+	text-align: left;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.phone-notes ul {
+	margin-top: 10px;
+	padding-left: 20px;
+}
+
+.phone-notes li {
+	margin-bottom: 5px;
+	color: #666;
+}
+
+@media (max-width: 768px) {
+	.support-options {
+		grid-template-columns: 1fr;
+	}
+
+	.message {
+		max-width: 85%;
+	}
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Услуги - SoSI</title>
+	<link rel="icon" type="image/x-icon" href="../favicon.ico">
+	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/services.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	<!-- Навигация -->
+	<nav>
+		<div class="nav-container">
+			<div class="logo">
+				<i class="fas fa-shield-alt"></i>
+				<span>SoSI</span>
+			</div>
+			<ul class="nav-links">
+				<li><a href="../index.html" class="nav-link">Главная</a></li>
+				<li><a href="services.html" class="nav-link active">Услуги</a></li>
+				<li><a href="reviews.html" class="nav-link">Отзывы</a></li>
+				<li><a href="support.html" class="nav-link">Техподдержка</a></li>
+				<li><a href="executor-chat.html" class="nav-link">Чат с исполнителем</a></li>
+				<li><a href="login.html" class="nav-link">Вход</a></li>
+				<li><a href="register.html" class="nav-link">Регистрация</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Страница услуг -->
+	<div class="main-content">
+		<div class="page active">
+			<div class="container">
+				<div class="page-header">
+					<h1>Наши услуги</h1>
+					<p>Выберите подходящую услугу для защиты вашего IT-проекта</p>
+				</div>
+
+				<div class="services-categories">
+					<button class="category-btn active">Все услуги</button>
+					<button class="category-btn">Пентестинг</button>
+					<button class="category-btn">Анализ кода</button>
+					<button class="category-btn">Консалтинг</button>
+				</div>
+
+				<div class="search-container">
+					<input type="text" class="search-box" placeholder="Поиск услуг...">
+				</div>
+
+				<div class="services-grid">
+					<!-- Карточки услуг остаются без изменений -->
+					<div class="service-card">
+						<div class="service-icon">
+							<i class="fas fa-network-wired"></i>
+						</div>
+						<div class="service-content">
+							<h3 class="service-title">Внутренний пентест</h3>
+							<p class="service-description">Тестирование безопасности внутренней сети организации для
+								выявления уязвимостей, доступных атакующему внутри периметра.</p>
+							<div class="service-features">
+								<div class="service-feature">
+									<i class="fas fa-check"></i>
+									Анализ внутренней инфраструктуры
+								</div>
+								<div class="service-feature">
+									<i class="fas fa-check"></i>
+									Тестирование прав доступа
+								</div>
+								<div class="service-feature">
+									<i class="fas fa-check"></i>
+									Проверка сегментации сети
+								</div>
+							</div>
+							<div class="service-price">от 50 000 ₽</div>
+							<button class="service-button">Выбрать услугу</button>
+						</div>
+					</div>
+
+					<!-- Остальные карточки услуг... -->
+				</div>
+
+				<button class="load-more">
+					<i class="fas fa-plus"></i>
+					Загрузить больше услуг
+				</button>
+
+				<div class="services-info">
+					<h3>Почему выбирают наши услуги?</h3>
+					<div class="info-grid">
+						<div class="info-item">
+							<i class="fas fa-certificate"></i>
+							<h4>Сертифицированные специалисты</h4>
+							<p>Наша команда имеет международные сертификаты в области кибербезопасности</p>
+						</div>
+						<div class="info-item">
+							<i class="fas fa-clock"></i>
+							<h4>Быстрый старт</h4>
+							<p>Начинаем работу в течение 24 часов после подтверждения заказа</p>
+						</div>
+						<div class="info-item">
+							<i class="fas fa-shield-alt"></i>
+							<h4>Конфиденциальность</h4>
+							<p>Гарантируем полную конфиденциальность ваших данных и результатов</p>
+						</div>
+						<div class="info-item">
+							<i class="fas fa-headset"></i>
+							<h4>Поддержка 24/7</h4>
+							<p>Круглосуточная техническая поддержка на всех этапах сотрудничества</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/script.js"></script>
+	<script src="../js/services.js"></script>
+</body>
+
+</html>

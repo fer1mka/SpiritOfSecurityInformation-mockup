@@ -1,3 +1,4 @@
+/* Стили для страницы оплаты */
 * {
 	margin: 0;
 	padding: 0;
@@ -430,4 +431,27 @@ body {
 .support-contacts a {
 	color: #3498db;
 	text-decoration: none;
+}
+
+@media (max-width: 768px) {
+	body {
+		padding: 10px;
+	}
+
+	.methods-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.sbp-info {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.payment-footer {
+		grid-template-columns: 1fr;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+	}
 }
