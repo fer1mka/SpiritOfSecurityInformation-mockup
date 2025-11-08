@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Профиль - SoSI</title>
+	<title>Профиль пользователя - SoSI</title>
 	<link rel="icon" type="image/x-icon" href="../favicon.ico">
 	<link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="../css/profile.css">
@@ -31,11 +31,368 @@
 		</div>
 	</nav>
 
-	<!-- Основной контент -->
 	<div class="main-content">
 		<div class="page active">
-			<div class="profile-container">
-				<!-- Содержимое профиля остается без изменений -->
+			<div class="container">
+				<div class="profile-header">
+					<h1>Профиль пользователя</h1>
+					<p>Управление вашими данными и заказами</p>
+				</div>
+
+				<div class="profile-layout">
+					<!-- Боковая панель профиля -->
+					<div class="profile-sidebar">
+						<div class="user-card">
+							<div class="avatar-container">
+								<div class="avatar" id="userAvatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<button class="avatar-upload-btn" id="avatarUploadBtn">
+									<i class="fas fa-camera"></i>
+								</button>
+								<input type="file" id="avatarInput" accept="image/*" style="display: none;">
+							</div>
+							<div class="user-info">
+								<h3 id="userName">Иван Иванов</h3>
+								<p class="user-email" id="userEmail">ivan@example.com</p>
+								<div class="user-stats">
+									<div class="stat-item">
+										<span class="stat-number" id="activeOrdersCount">3</span>
+										<span class="stat-label">Активных заказа</span>
+									</div>
+									<div class="stat-item">
+										<span class="stat-number" id="completedOrdersCount">7</span>
+										<span class="stat-label">Завершено</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<nav class="profile-nav">
+							<button class="nav-btn active" data-tab="orders">
+								<i class="fas fa-list-alt"></i>
+								Мои заказы
+							</button>
+							<button class="nav-btn" data-tab="settings">
+								<i class="fas fa-cog"></i>
+								Настройки
+							</button>
+							<button class="nav-btn" data-tab="security">
+								<i class="fas fa-shield-alt"></i>
+								Безопасность
+							</button>
+							<button class="nav-btn" data-tab="billing">
+								<i class="fas fa-credit-card"></i>
+								Платежи
+							</button>
+						</nav>
+					</div>
+
+					<!-- Основное содержимое -->
+					<div class="profile-content">
+						<!-- Вкладка заказов -->
+						<div class="tab-content active" id="orders-tab">
+							<div class="tab-header">
+								<h2>Мои заказы</h2>
+								<div class="order-filters">
+									<button class="filter-btn active" data-filter="all">Все</button>
+									<button class="filter-btn" data-filter="active">Активные</button>
+									<button class="filter-btn" data-filter="completed">Завершенные</button>
+								</div>
+							</div>
+
+							<div class="orders-container">
+								<!-- Активные заказы -->
+								<div class="orders-section">
+									<h3>Текущие заказы</h3>
+									<div class="orders-grid" id="activeOrders">
+										<div class="order-card active">
+											<div class="order-header">
+												<h4>Анализ кода на уязвимости</h4>
+												<span class="order-status in-progress">В работе</span>
+											</div>
+											<div class="order-info">
+												<div class="order-detail">
+													<strong>Исполнитель:</strong>
+													<span>Алексей, специалист по безопасности</span>
+												</div>
+												<div class="order-detail">
+													<strong>Начало:</strong>
+													<span>15 января 2024</span>
+												</div>
+												<div class="order-detail">
+													<strong>Срок сдачи:</strong>
+													<span>19 января 2024</span>
+												</div>
+											</div>
+											<div class="order-progress">
+												<div class="progress-info">
+													<span>Прогресс:</span>
+													<span>65%</span>
+												</div>
+												<div class="progress-bar">
+													<div class="progress-fill" style="width: 65%"></div>
+												</div>
+											</div>
+											<div class="order-actions">
+												<button class="action-btn primary">
+													<i class="fas fa-comments"></i>
+													Чат с исполнителем
+												</button>
+												<button class="action-btn">
+													<i class="fas fa-info-circle"></i>
+													Детали
+												</button>
+											</div>
+										</div>
+
+										<div class="order-card active">
+											<div class="order-header">
+												<h4>Внешний пентест</h4>
+												<span class="order-status pending">Ожидает начала</span>
+											</div>
+											<div class="order-info">
+												<div class="order-detail">
+													<strong>Исполнитель:</strong>
+													<span>Дмитрий, пентестер</span>
+												</div>
+												<div class="order-detail">
+													<strong>Начало:</strong>
+													<span>20 января 2024</span>
+												</div>
+												<div class="order-detail">
+													<strong>Срок сдачи:</strong>
+													<span>25 января 2024</span>
+												</div>
+											</div>
+											<div class="order-progress">
+												<div class="progress-info">
+													<span>Прогресс:</span>
+													<span>0%</span>
+												</div>
+												<div class="progress-bar">
+													<div class="progress-fill" style="width: 0%"></div>
+												</div>
+											</div>
+											<div class="order-actions">
+												<button class="action-btn">
+													<i class="fas fa-edit"></i>
+													Изменить
+												</button>
+												<button class="action-btn danger">
+													<i class="fas fa-times"></i>
+													Отменить
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Завершенные заказы -->
+								<div class="orders-section">
+									<h3>Завершенные заказы</h3>
+									<div class="orders-grid" id="completedOrders">
+										<div class="order-card completed">
+											<div class="order-header">
+												<h4>Аудит Wi-Fi сетей</h4>
+												<span class="order-status completed">Завершен</span>
+											</div>
+											<div class="order-info">
+												<div class="order-detail">
+													<strong>Исполнитель:</strong>
+													<span>Мария, аналитик кода</span>
+												</div>
+												<div class="order-detail">
+													<strong>Период:</strong>
+													<span>5-12 января 2024</span>
+												</div>
+												<div class="order-detail">
+													<strong>Оценка:</strong>
+													<span class="rating">
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star-half-alt"></i>
+													</span>
+												</div>
+											</div>
+											<div class="order-actions">
+												<button class="action-btn">
+													<i class="fas fa-download"></i>
+													Скачать отчет
+												</button>
+												<button class="action-btn">
+													<i class="fas fa-file-alt"></i>
+													Детали
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Вкладка настроек -->
+						<div class="tab-content" id="settings-tab">
+							<div class="tab-header">
+								<h2>Настройки профиля</h2>
+							</div>
+
+							<form class="settings-form" id="profileForm">
+								<div class="form-section">
+									<h3>Основная информация</h3>
+									<div class="form-row">
+										<div class="form-group">
+											<label for="firstName">Имя</label>
+											<input type="text" id="firstName" value="Иван" required>
+										</div>
+										<div class="form-group">
+											<label for="lastName">Фамилия</label>
+											<input type="text" id="lastName" value="Иванов" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="username">Имя пользователя</label>
+										<input type="text" id="username" value="ivanov" required>
+									</div>
+									<div class="form-group">
+										<label for="phone">Телефон</label>
+										<input type="tel" id="phone" value="+7 (900) 123-45-67">
+									</div>
+								</div>
+
+								<div class="form-section">
+									<h3>Уведомления</h3>
+									<div class="checkbox-group">
+										<label class="checkbox-label">
+											<input type="checkbox" checked>
+											<span class="checkmark"></span>
+											Email уведомления
+										</label>
+										<label class="checkbox-label">
+											<input type="checkbox" checked>
+											<span class="checkmark"></span>
+											Уведомления о статусе заказа
+										</label>
+										<label class="checkbox-label">
+											<input type="checkbox">
+											<span class="checkmark"></span>
+											Новости и акции
+										</label>
+									</div>
+								</div>
+
+								<button type="submit" class="save-btn">
+									<i class="fas fa-save"></i>
+									Сохранить изменения
+								</button>
+							</form>
+						</div>
+
+						<!-- Вкладка безопасности -->
+						<div class="tab-content" id="security-tab">
+							<div class="tab-header">
+								<h2>Безопасность</h2>
+							</div>
+
+							<div class="security-settings">
+								<div class="security-section">
+									<h3>Смена пароля</h3>
+									<form class="password-form" id="passwordForm">
+										<div class="form-group">
+											<label for="currentPassword">Текущий пароль</label>
+											<input type="password" id="currentPassword" required>
+										</div>
+										<div class="form-group">
+											<label for="newPassword">Новый пароль</label>
+											<input type="password" id="newPassword" required>
+											<div class="password-strength">
+												<div class="strength-bar"></div>
+												<span class="strength-text">Надежность пароля</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="confirmPassword">Подтвердите новый пароль</label>
+											<input type="password" id="confirmPassword" required>
+										</div>
+										<button type="submit" class="save-btn">
+											<i class="fas fa-key"></i>
+											Сменить пароль
+										</button>
+									</form>
+								</div>
+
+								<div class="security-section">
+									<h3>Двухфакторная аутентификация</h3>
+									<div class="two-factor">
+										<div class="two-factor-info">
+											<p>Добавьте дополнительный уровень безопасности к вашему аккаунту</p>
+											<div class="two-factor-status">
+												<span class="status-off">Выключена</span>
+											</div>
+										</div>
+										<button class="enable-2fa-btn">
+											<i class="fas fa-shield-alt"></i>
+											Включить 2FA
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Вкладка платежей -->
+						<div class="tab-content" id="billing-tab">
+							<div class="tab-header">
+								<h2>Платежи и счета</h2>
+							</div>
+
+							<div class="billing-content">
+								<div class="billing-section">
+									<h3>История платежей</h3>
+									<div class="payment-history">
+										<div class="payment-item">
+											<div class="payment-info">
+												<div class="payment-service">Анализ кода на уязвимости</div>
+												<div class="payment-date">15 января 2024</div>
+											</div>
+											<div class="payment-amount">35 000 ₽</div>
+											<div class="payment-status paid">Оплачен</div>
+										</div>
+										<div class="payment-item">
+											<div class="payment-info">
+												<div class="payment-service">Внешний пентест</div>
+												<div class="payment-date">10 января 2024</div>
+											</div>
+											<div class="payment-amount">75 000 ₽</div>
+											<div class="payment-status paid">Оплачен</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="billing-section">
+									<h3>Способы оплаты</h3>
+									<div class="payment-methods">
+										<div class="payment-method">
+											<div class="method-icon">
+												<i class="fas fa-credit-card"></i>
+											</div>
+											<div class="method-info">
+												<div class="method-name">Банковская карта •••• 1234</div>
+												<div class="method-type">Visa</div>
+											</div>
+											<button class="method-action">Изменить</button>
+										</div>
+									</div>
+									<button class="add-payment-btn">
+										<i class="fas fa-plus"></i>
+										Добавить способ оплаты
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

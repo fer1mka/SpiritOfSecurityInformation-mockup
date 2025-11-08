@@ -1,266 +1,342 @@
-// Функции для чата с исполнителем
+// Функции для страницы профиля
 document.addEventListener('DOMContentLoaded', function () {
-	initChatSelection();
-	initChatFunctionality();
-	initFileUpload();
-	initProjectActions();
+	initProfileTabs();
+	initAvatarUpload();
+	initOrderFilters();
+	initForms();
+	initPasswordStrength();
 });
 
-function initChatSelection() {
-	const chatItems = document.querySelectorAll('.chat-item');
-	chatItems.forEach(item => {
-		item.addEventListener('click', function () {
-			// Убираем активный класс у всех чатов
-			chatItems.forEach(chat => chat.classList.remove('active'));
-			// Добавляем активный класс текущему чату
+// Инициализация вкладок профиля
+function initProfileTabs() {
+	const navButtons = document.querySelectorAll('.nav-btn');
+	const tabContents = document.querySelectorAll('.tab-content');
+
+	navButtons.forEach(button => {
+		button.addEventListener('click', function () {
+			const tabName = this.getAttribute('data-tab');
+
+			// Убираем активный класс у всех кнопок
+			navButtons.forEach(btn => btn.classList.remove('active'));
+			// Добавляем активный класс текущей кнопке
 			this.classList.add('active');
 
-			// Обновляем информацию о выбранном исполнителе
-			const chatName = this.querySelector('.chat-name').textContent;
-			const executorNameElement = document.querySelector('.executor-name');
-			if (executorNameElement) {
-				executorNameElement.textContent = chatName;
-			}
-
-			// Очищаем поле ввода при смене чата
-			const chatInput = document.getElementById('chatInput');
-			if (chatInput) {
-				chatInput.value = '';
-			}
-
-			console.log('Загружаем историю чата:', chatName);
+			// Скрываем все вкладки
+			tabContents.forEach(tab => tab.classList.remove('active'));
+			// Показываем выбранную вкладку
+			document.getElementById(tabName + '-tab').classList.add('active');
 		});
 	});
 }
 
-function initChatFunctionality() {
-	const chatInput = document.getElementById('chatInput');
-	const sendButton = document.getElementById('sendMessageBtn');
-	const chatMessages = document.getElementById('chatMessages');
+// Загрузка аватарки
+function initAvatarUpload() {
+	const avatarUploadBtn = document.getElementById('avatarUploadBtn');
+	const avatarInput = document.getElementById('avatarInput');
+	const userAvatar = document.getElementById('userAvatar');
 
-	if (chatInput && sendButton && chatMessages) {
-		function sendMessage() {
-			const messageText = chatInput.value.trim();
+	avatarUploadBtn.addEventListener('click', function () {
+		avatarInput.click();
+	});
 
-			if (messageText) {
-				// Создаем элемент сообщения пользователя
-				const messageElement = createMessageElement('user', messageText, getCurrentTime());
+	avatarInput.addEventListener('change', function (e) {
+		const file = e.target.files[0];
+		if (file) {
+			if (file.type.startsWith('image/')) {
+				const reader = new FileReader();
 
-				// Добавляем сообщение в чат
-				chatMessages.appendChild(messageElement);
+				reader.onload = function (e) {
+					// Создаем новый элемент изображения
+					const img = document.createElement('img');
+					img.src = e.target.result;
+					img.alt = 'Аватар пользователя';
+					img.style.width = '100%';
+					img.style.height = '100%';
+					img.style.borderRadius = '50%';
+					img.style.objectFit = 'cover';
 
-				// Очищаем поле ввода
-				chatInput.value = '';
+					// Очищаем содержимое аватара и добавляем изображение
+					userAvatar.innerHTML = '';
+					userAvatar.appendChild(img);
 
-				// Прокручиваем к последнему сообщению
-				scrollToBottom();
+					// Сохраняем в localStorage (в реальном приложении - отправка на сервер)
+					localStorage.setItem('userAvatar', e.target.result);
 
-				// Показываем индикатор набора текста исполнителем
-				showTypingIndicator();
+					showNotification('Аватар успешно обновлен!', 'success');
+				};
 
-				// Имитируем ответ исполнителя через случайную задержку
-				setTimeout(() => {
-					// Убираем индикатор набора
-					removeTypingIndicator();
-
-					// Генерируем ответ исполнителя
-					const responseText = generateExecutorResponse(messageText);
-					const responseElement = createMessageElement('support', responseText, getCurrentTime(), 'Алексей');
-
-					// Добавляем ответ в чат
-					chatMessages.appendChild(responseElement);
-
-					// Прокручиваем к последнему сообщению
-					scrollToBottom();
-
-					// Обновляем превью в списке чатов
-					updateChatPreview(messageText);
-
-				}, getRandomDelay(1000, 3000));
+				reader.readAsDataURL(file);
+			} else {
+				showNotification('Пожалуйста, выберите изображение', 'error');
 			}
 		}
+	});
 
-		// Обработчик клика по кнопке отправки
-		sendButton.addEventListener('click', sendMessage);
+	// Загружаем сохраненный аватар при загрузке страницы
+	const savedAvatar = localStorage.getItem('userAvatar');
+	if (savedAvatar) {
+		const img = document.createElement('img');
+		img.src = savedAvatar;
+		img.alt = 'Аватар пользователя';
+		img.style.width = '100%';
+		img.style.height = '100%';
+		img.style.borderRadius = '50%';
+		img.style.objectFit = 'cover';
+		userAvatar.innerHTML = '';
+		userAvatar.appendChild(img);
+	}
+}
 
-		// Обработчик нажатия Enter в поле ввода
-		chatInput.addEventListener('keypress', function (e) {
-			if (e.key === 'Enter' && !e.shiftKey) {
-				e.preventDefault();
-				sendMessage();
-			}
+// Фильтрация заказов
+function initOrderFilters() {
+	const filterButtons = document.querySelectorAll('.filter-btn');
+	const orderCards = document.querySelectorAll('.order-card');
+
+	filterButtons.forEach(button => {
+		button.addEventListener('click', function () {
+			const filter = this.getAttribute('data-filter');
+
+			// Убираем активный класс у всех кнопок
+			filterButtons.forEach(btn => btn.classList.remove('active'));
+			// Добавляем активный класс текущей кнопке
+			this.classList.add('active');
+
+			// Фильтруем заказы
+			orderCards.forEach(card => {
+				if (filter === 'all') {
+					card.style.display = 'block';
+				} else if (filter === 'active') {
+					card.style.display = card.classList.contains('active') ? 'block' : 'none';
+				} else if (filter === 'completed') {
+					card.style.display = card.classList.contains('completed') ? 'block' : 'none';
+				}
+			});
 		});
+	});
+}
 
-		// Автофокус на поле ввода
-		chatInput.focus();
+// Инициализация форм
+function initForms() {
+	const profileForm = document.getElementById('profileForm');
+	const passwordForm = document.getElementById('passwordForm');
+
+	if (profileForm) {
+		profileForm.addEventListener('submit', function (e) {
+			e.preventDefault();
+
+			// Собираем данные формы
+			const formData = {
+				firstName: document.getElementById('firstName').value,
+				lastName: document.getElementById('lastName').value,
+				username: document.getElementById('username').value,
+				phone: document.getElementById('phone').value
+			};
+
+			// Сохраняем в localStorage (в реальном приложении - отправка на сервер)
+			localStorage.setItem('userProfile', JSON.stringify(formData));
+
+			// Обновляем данные в боковой панели
+			updateUserInfo(formData);
+
+			showNotification('Профиль успешно обновлен!', 'success');
+		});
+	}
+
+	if (passwordForm) {
+		passwordForm.addEventListener('submit', function (e) {
+			e.preventDefault();
+
+			const currentPassword = document.getElementById('currentPassword').value;
+			const newPassword = document.getElementById('newPassword').value;
+			const confirmPassword = document.getElementById('confirmPassword').value;
+
+			if (newPassword !== confirmPassword) {
+				showNotification('Пароли не совпадают', 'error');
+				return;
+			}
+
+			if (newPassword.length < 6) {
+				showNotification('Пароль должен содержать минимум 6 символов', 'error');
+				return;
+			}
+
+			// В реальном приложении здесь была бы отправка на сервер
+			showNotification('Пароль успешно изменен!', 'success');
+			passwordForm.reset();
+		});
+	}
+
+	// Загружаем сохраненные данные профиля
+	loadSavedProfile();
+}
+
+// Загрузка сохраненных данных профиля
+function loadSavedProfile() {
+	const savedProfile = localStorage.getItem('userProfile');
+	if (savedProfile) {
+		const profileData = JSON.parse(savedProfile);
+
+		document.getElementById('firstName').value = profileData.firstName || '';
+		document.getElementById('lastName').value = profileData.lastName || '';
+		document.getElementById('username').value = profileData.username || '';
+		document.getElementById('phone').value = profileData.phone || '';
+
+		updateUserInfo(profileData);
 	}
 }
 
-function createMessageElement(type, text, time, sender = null) {
-	const messageDiv = document.createElement('div');
-	messageDiv.className = `message ${type}`;
+// Обновление информации пользователя в боковой панели
+function updateUserInfo(profileData) {
+	const userNameElement = document.getElementById('userName');
+	const userEmailElement = document.getElementById('userEmail');
 
-	if (type === 'support') {
-		messageDiv.innerHTML = `
-            <div class="message-avatar">
-                <i class="fas fa-user-tie"></i>
-            </div>
-            <div class="message-content">
-                <div class="message-sender">${sender}</div>
-                <div class="message-text">${text}</div>
-                <div class="message-time">${time}</div>
-            </div>
-        `;
-	} else {
-		messageDiv.innerHTML = `
-            <div class="message-content">
-                <div class="message-text">${text}</div>
-                <div class="message-time">${time}</div>
-            </div>
-        `;
+	if (userNameElement && profileData.firstName && profileData.lastName) {
+		userNameElement.textContent = `${profileData.firstName} ${profileData.lastName}`;
 	}
 
-	return messageDiv;
+	if (userEmailElement && profileData.username) {
+		userEmailElement.textContent = `${profileData.username}@example.com`;
+	}
 }
 
-function showTypingIndicator() {
-	const chatMessages = document.getElementById('chatMessages');
-	const typingIndicator = document.createElement('div');
-	typingIndicator.className = 'message support typing-indicator';
-	typingIndicator.id = 'typingIndicator';
-	typingIndicator.innerHTML = `
-        <div class="message-avatar">
-            <i class="fas fa-user-tie"></i>
-        </div>
-        <div class="message-content">
-            <div class="message-sender">Алексей</div>
-            <div class="typing-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+// Проверка надежности пароля
+function initPasswordStrength() {
+	const newPasswordInput = document.getElementById('newPassword');
+	const strengthBar = document.querySelector('.strength-bar');
+	const strengthText = document.querySelector('.strength-text');
+
+	if (newPasswordInput && strengthBar && strengthText) {
+		newPasswordInput.addEventListener('input', function () {
+			const password = this.value;
+			const strength = calculatePasswordStrength(password);
+
+			updatePasswordStrength(strength, strengthBar, strengthText);
+		});
+	}
+}
+
+function calculatePasswordStrength(password) {
+	let strength = 0;
+
+	if (password.length >= 8) strength++;
+	if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+	if (password.match(/\d/)) strength++;
+	if (password.match(/[^a-zA-Z\d]/)) strength++;
+
+	return strength;
+}
+
+function updatePasswordStrength(strength, bar, text) {
+	const strengthLevels = {
+		0: { width: '0%', color: '#e74c3c', text: 'Очень слабый' },
+		1: { width: '25%', color: '#e74c3c', text: 'Слабый' },
+		2: { width: '50%', color: '#f39c12', text: 'Средний' },
+		3: { width: '75%', color: '#f39c12', text: 'Хороший' },
+		4: { width: '100%', color: '#2ecc71', text: 'Надежный' }
+	};
+
+	const level = strengthLevels[strength] || strengthLevels[0];
+
+	bar.style.width = level.width;
+	bar.style.backgroundColor = level.color;
+	text.textContent = level.text;
+	text.style.color = level.color;
+}
+
+// Уведомления
+function showNotification(message, type = 'info') {
+	// Создаем элемент уведомления
+	const notification = document.createElement('div');
+	notification.className = `notification ${type}`;
+	notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
         </div>
     `;
 
-	chatMessages.appendChild(typingIndicator);
-	scrollToBottom();
+	// Добавляем стили для уведомления
+	notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#2ecc71' : '#e74c3c'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: slideInRight 0.3s ease;
+    `;
+
+	document.body.appendChild(notification);
+
+	// Удаляем уведомление через 3 секунды
+	setTimeout(() => {
+		notification.style.animation = 'slideOutRight 0.3s ease';
+		setTimeout(() => {
+			if (notification.parentNode) {
+				notification.parentNode.removeChild(notification);
+			}
+		}, 300);
+	}, 3000);
 }
 
-function removeTypingIndicator() {
-	const typingIndicator = document.getElementById('typingIndicator');
-	if (typingIndicator) {
-		typingIndicator.remove();
-	}
+// Добавляем CSS анимации для уведомлений
+const notificationStyles = `
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-function generateExecutorResponse(userMessage) {
-	const responses = [
-		"Понял ваш вопрос. Давайте разберемся детальнее.",
-		"Спасибо за уточнение! Учту это в работе.",
-		"Отличный вопрос! Как раз сейчас работаю над этим.",
-		"По этому вопросу могу сказать следующее...",
-		"Да, я уже занимаюсь этим. Результаты скоро будут готовы.",
-		"Хорошо, приму к сведению. Продолжаем работу.",
-		"По вашей проблеме: уже нашел несколько решений.",
-		"Спасибо за информацию! Это поможет ускорить процесс.",
-		"Понимаю вашу озабоченность. Работаю в приоритетном порядке.",
-		"Отлично! Жду следующих уточнений по проекту."
-	];
-
-	// Простая логика ответов на основе ключевых слов
-	const lowerMessage = userMessage.toLowerCase();
-
-	if (lowerMessage.includes('когда') || lowerMessage.includes('срок')) {
-		return "Предварительный отчет будет готов к пятнице. Сейчас завершаю основные проверки.";
-	} else if (lowerMessage.includes('проблем') || lowerMessage.includes('ошибк')) {
-		return "Пока серьезных проблем не обнаружено. Есть несколько minor issues, которые легко исправить.";
-	} else if (lowerMessage.includes('отчет') || lowerMessage.includes('результат')) {
-		return "Отчет будет содержать детальный анализ всех модулей и рекомендации по исправлению уязвимостей.";
-	} else if (lowerMessage.includes('стоимость') || lowerMessage.includes('цена')) {
-		return "Стоимость услуг остается неизменной, согласно нашему договору.";
-	} else {
-		// Случайный ответ из общего пула
-		return responses[Math.floor(Math.random() * responses.length)];
-	}
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
-function updateChatPreview(lastMessage) {
-	const activeChat = document.querySelector('.chat-item.active');
-	if (activeChat) {
-		const previewElement = activeChat.querySelector('.chat-preview');
-		const timeElement = activeChat.querySelector('.chat-time');
-
-		if (previewElement) {
-			previewElement.textContent = lastMessage.length > 40 ?
-				lastMessage.substring(0, 40) + '...' : lastMessage;
-		}
-
-		if (timeElement) {
-			timeElement.textContent = getCurrentTime();
-		}
-	}
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+`;
 
-function getCurrentTime() {
-	const now = new Date();
-	return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+const styleSheet = document.createElement('style');
+styleSheet.textContent = notificationStyles;
+document.head.appendChild(styleSheet);
 
-function getRandomDelay(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function scrollToBottom() {
-	const chatMessages = document.getElementById('chatMessages');
-	if (chatMessages) {
-		chatMessages.scrollTop = chatMessages.scrollHeight;
-	}
-}
-
-function initFileUpload() {
-	const attachFileBtn = document.getElementById('attachFileBtn');
-	const fileActionBtn = document.querySelector('.action-btn .fa-paperclip')?.closest('.action-btn');
-
-	[attachFileBtn, fileActionBtn].forEach(btn => {
-		if (btn) {
+// Обработчики для кнопок действий
+document.addEventListener('DOMContentLoaded', function () {
+	// Обработчик для кнопки "Чат с исполнителем"
+	document.querySelectorAll('.action-btn.primary').forEach(btn => {
+		if (btn.textContent.includes('Чат')) {
 			btn.addEventListener('click', function () {
-				const fileInput = document.createElement('input');
-				fileInput.type = 'file';
-				fileInput.style.display = 'none';
-				fileInput.multiple = true;
-
-				fileInput.addEventListener('change', function (e) {
-					const files = e.target.files;
-					if (files.length > 0) {
-						// В реальном приложении здесь была бы загрузка файлов
-						const chatInput = document.getElementById('chatInput');
-						if (chatInput) {
-							chatInput.value = `Прикреплено файлов: ${files.length} (в реальном приложении файлы будут загружены)`;
-						}
-					}
-				});
-
-				document.body.appendChild(fileInput);
-				fileInput.click();
-				document.body.removeChild(fileInput);
+				window.location.href = 'executor-chat.html';
 			});
 		}
 	});
-}
 
-function initProjectActions() {
-	const infoButtons = document.querySelectorAll('.action-btn');
-	infoButtons.forEach(btn => {
-		if (btn.querySelector('.fa-info-circle')) {
-			btn.addEventListener('click', function () {
-				alert('Информация о проекте:\n\nПроект: Анализ кода на уязвимости\nСтатус: В работе\nСрок сдачи: 19 января 2024\nПрогресс: 65%');
-			});
-		}
-
-		if (btn.querySelector('.fa-cog')) {
-			btn.addEventListener('click', function () {
-				alert('Настройки чата:\n\n- Уведомления о новых сообщениях\n- Звуковые оповещения\n- Автосохранение черновиков');
-			});
-		}
+	// Обработчик для включения 2FA
+	document.querySelector('.enable-2fa-btn')?.addEventListener('click', function () {
+		showNotification('Двухфакторная аутентификация включена!', 'success');
+		this.textContent = '2FA включена';
+		this.disabled = true;
 	});
-}
+
+	// Обработчик для добавления способа оплаты
+	document.querySelector('.add-payment-btn')?.addEventListener('click', function () {
+		showNotification('Функция добавления способа оплаты будет доступна в ближайшее время', 'info');
+	});
+});
