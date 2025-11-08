@@ -1,10 +1,79 @@
-// Функции для страницы оплаты
+// Функции для открытия/закрытия модального окна оплаты
+function openPaymentModal(serviceName, servicePrice, serviceDescription) {
+	// Устанавливаем данные услуги
+	if (serviceName) {
+		document.getElementById('serviceName').textContent = serviceName;
+	}
+	if (servicePrice) {
+		const priceElements = document.querySelectorAll('#priceAmount, #summaryPrice, #totalAmount, #payAmount');
+		priceElements.forEach(element => {
+			element.textContent = servicePrice;
+		});
+	}
+	if (serviceDescription) {
+		document.querySelector('.service-details .service-description').textContent = serviceDescription;
+	}
+	
+	// Показываем модальное окно
+	document.getElementById('paymentOverlay').style.display = 'block';
+	document.getElementById('paymentModal').classList.add('active');
+	document.body.style.overflow = 'hidden';
+}
+
+function closePaymentModal() {
+	document.getElementById('paymentOverlay').style.display = 'none';
+	document.getElementById('paymentModal').classList.remove('active');
+	document.body.style.overflow = '';
+}
+
+// Инициализация модального окна
 document.addEventListener('DOMContentLoaded', function () {
+	// Добавляем обработчик закрытия
+	const closeBtn = document.getElementById('closePaymentBtn');
+	const overlay = document.getElementById('paymentOverlay');
+	
+	if (closeBtn) {
+		closeBtn.addEventListener('click', closePaymentModal);
+	}
+	if (overlay) {
+		overlay.addEventListener('click', closePaymentModal);
+	}
+	
+	// Закрытие по ESC
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			closePaymentModal();
+		}
+	});
+	
+	// Предотвращаем закрытие при клике на само модальное окно
+	const modal = document.getElementById('paymentModal');
+	if (modal) {
+		modal.addEventListener('click', function(e) {
+			e.stopPropagation();
+		});
+	}
+	
+	// Инициализация остальных функций оплаты
 	initPaymentMethods();
 	initPaymentForm();
 	initPayButton();
 });
 
+// Обновляем функцию закрытия модального окна после оплаты
+function closeModalAndRedirect() {
+	const modal = document.querySelector('.payment-modal');
+	if (modal) {
+		modal.remove();
+	}
+	closePaymentModal();
+	// Перенаправляем на главную страницу
+	setTimeout(() => {
+		window.location.href = '../index.html';
+	}, 500);
+}
+
+// Функции для работы с оплатой
 function initPaymentMethods() {
 	const methodCards = document.querySelectorAll('.method-card');
 	const paymentForms = document.querySelectorAll('.payment-form');
@@ -172,14 +241,6 @@ function closeModal() {
 		modal.remove();
 		document.body.style.overflow = '';
 	}
-}
-
-function closeModalAndRedirect() {
-	closeModal();
-	// Перенаправляем на главную страницу
-	setTimeout(() => {
-		window.location.href = '../index.html';
-	}, 500);
 }
 
 // Добавляем стили для модальных окон

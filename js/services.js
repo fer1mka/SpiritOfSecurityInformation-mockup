@@ -131,12 +131,13 @@ function initServiceButtons() {
 	// Добавляем новые обработчики
 	document.querySelectorAll('.service-button').forEach(button => {
 		button.addEventListener('click', function () {
-			const serviceTitle = this.closest('.service-card').querySelector('.service-title').textContent;
-			const servicePrice = this.closest('.service-card').querySelector('.service-price').textContent;
+			const serviceCard = this.closest('.service-card');
+			const serviceTitle = serviceCard.querySelector('.service-title').textContent;
+			const servicePrice = serviceCard.querySelector('.service-price').textContent;
+			const serviceDescription = serviceCard.querySelector('.service-description').textContent;
 
-			// Перенаправляем на страницу оплаты с параметрами
-			const url = `payment.html?service=${encodeURIComponent(serviceTitle)}&price=${encodeURIComponent(servicePrice.replace(/[^\d]/g, ''))}`;
-			window.location.href = url;
+			// Открываем модальное окно оплаты
+			openPaymentModal(serviceTitle, servicePrice, serviceDescription);
 		});
 	});
 }
@@ -199,4 +200,26 @@ function filterServicesBySearch(searchTerm) {
 			card.style.display = 'none';
 		}
 	});
+}
+
+// Функция для открытия модального окна оплаты
+function openPaymentModal(serviceName, servicePrice, serviceDescription) {
+	// Устанавливаем данные услуги
+	if (serviceName) {
+		document.getElementById('serviceName').textContent = serviceName;
+	}
+	if (servicePrice) {
+		const priceElements = document.querySelectorAll('#priceAmount, #summaryPrice, #totalAmount, #payAmount');
+		priceElements.forEach(element => {
+			element.textContent = servicePrice;
+		});
+	}
+	if (serviceDescription) {
+		document.querySelector('.service-details .service-description').textContent = serviceDescription;
+	}
+	
+	// Показываем модальное окно
+	document.getElementById('paymentOverlay').style.display = 'block';
+	document.getElementById('paymentModal').classList.add('active');
+	document.body.style.overflow = 'hidden';
 }
