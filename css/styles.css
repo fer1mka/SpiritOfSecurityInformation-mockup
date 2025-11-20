@@ -7,8 +7,8 @@
 }
 
 body {
-	height: 100vh;
-	overflow: hidden;
+	min-height: 100vh;
+	overflow-x: hidden;
 	background: linear-gradient(135deg, #e3f2fd 0%, #f0f4f8 100%);
 }
 
@@ -70,9 +70,9 @@ nav {
 
 /* Основной контент */
 .main-content {
-	height: 100vh;
+	min-height: calc(100vh - 70px);
 	padding-top: 70px;
-	overflow-y: auto;
+	overflow-y: visible;
 }
 
 .container {
@@ -190,7 +190,7 @@ nav {
 .auth-wrapper {
 	display: grid;
 	grid-template-columns: 1fr 400px;
-	height: calc(100vh - 70px);
+	min-height: calc(100vh - 70px);
 }
 
 .auth-container {
@@ -568,7 +568,7 @@ nav {
 
 	.auth-wrapper {
 		grid-template-columns: 1fr;
-		height: auto;
+		min-height: auto;
 	}
 
 	.auth-sidebar {
@@ -648,4 +648,17 @@ nav {
 
 .mobile-nav-links li:nth-child(7) {
 	animation-delay: 0.4s;
+}
+
+/* Дополнительные стили для профилей */
+.profile-container {
+	min-height: calc(100vh - 70px);
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-main-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 }

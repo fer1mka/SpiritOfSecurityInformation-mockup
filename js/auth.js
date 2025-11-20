@@ -1,9 +1,33 @@
 // Специфичные функции для страниц аутентификации
 document.addEventListener('DOMContentLoaded', function () {
+	initLoginForm();
 	initSocialAuth();
 	initPhoneMask();
 	initForgotPassword();
 });
+
+function initLoginForm() {
+	const loginForm = document.getElementById('loginForm');
+	if (loginForm) {
+		loginForm.addEventListener('submit', function (e) {
+			e.preventDefault();
+			
+			const username = document.getElementById('login-username').value.trim().toLowerCase();
+			const password = document.getElementById('login-password').value;
+			
+			// Проверяем тип пользователя по логину/email
+			if (username.startsWith('user') || (username.includes('@') && username.split('@')[0] === 'user')) {
+				// Заказчик
+				window.location.href = 'profile-user.html';
+			} else if (username.startsWith('executor') || (username.includes('@') && username.split('@')[0] === 'executor')) {
+				// Исполнитель
+				window.location.href = 'profile-executor.html';
+			} else {
+				alert('Неверные данные для входа. Используйте "user" для заказчика или "executor" для исполнителя.');
+			}
+		});
+	}
+}
 
 function initSocialAuth() {
 	const socialButtons = document.querySelectorAll('.social-button');

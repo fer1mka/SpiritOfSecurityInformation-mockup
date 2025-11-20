@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Чат с заказчиком - SoSI</title>
+	<link rel="icon" type="image/x-icon" href="../favicon.ico">
+	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/customer-chat.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	<!-- Навигация -->
+	<nav>
+		<div class="nav-container">
+			<div class="logo">
+				<i class="fas fa-shield-alt"></i>
+				<span>SoSI</span>
+			</div>
+			<ul class="nav-links">
+				<li><a href="../index.html" class="nav-link">Главная</a></li>
+				<li><a href="services.html" class="nav-link">Услуги</a></li>
+				<li><a href="reviews.html" class="nav-link">Отзывы</a></li>
+				<li><a href="support.html" class="nav-link">Техподдержка</a></li>
+				<li><a href="customer-chat.html" class="nav-link active">Чат с заказчиком</a></li>
+				<li><a href="profile-executor.html" class="nav-link">Профиль</a></li>
+				<li><a href="login.html" class="nav-link">Выход</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="main-content">
+		<div class="page active">
+			<div class="container">
+				<div class="customer-chat-layout">
+					<!-- Список чатов -->
+					<div class="chat-sidebar">
+						<div class="sidebar-header">
+							<h3>Мои проекты</h3>
+							<button class="new-chat-btn">
+								<i class="fas fa-plus"></i>
+							</button>
+						</div>
+						<div class="chat-list">
+							<div class="chat-item active">
+								<div class="chat-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div class="chat-info">
+									<div class="chat-name">Иван Иванов, ООО "Рога и копыта"</div>
+									<div class="chat-preview">Когда будет готов предварительный отчет?</div>
+									<div class="chat-time">10:05</div>
+								</div>
+							</div>
+							<div class="chat-item">
+								<div class="chat-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div class="chat-info">
+									<div class="chat-name">Петр Сидоров, ИП "ТехноСити"</div>
+									<div class="chat-preview">Готов начать внешний пентест на следующей...</div>
+									<div class="chat-time">Вчера</div>
+								</div>
+							</div>
+							<div class="chat-item">
+								<div class="chat-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div class="chat-info">
+									<div class="chat-name">Мария Иванова, ООО "СейфНет"</div>
+									<div class="chat-preview">Спасибо за качественный аудит Wi-Fi сетей!</div>
+									<div class="chat-time">15 янв</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Основной чат -->
+					<div class="customer-chat-container">
+						<div class="customer-chat-header">
+							<div class="customer-info">
+								<div class="customer-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div>
+									<div class="customer-name">Иван Иванов, ООО "Рога и копыта"</div>
+									<div class="customer-status">
+										<span class="status-dot online"></span>
+										В сети
+									</div>
+								</div>
+							</div>
+							<div class="customer-actions">
+								<button class="action-btn" title="Информация о проекте">
+									<i class="fas fa-info-circle"></i>
+								</button>
+								<button class="action-btn" title="Прикрепить файл">
+									<i class="fas fa-paperclip"></i>
+								</button>
+								<button class="action-btn" title="Настройки чата">
+									<i class="fas fa-cog"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="customer-chat-messages" id="chatMessages">
+							<div class="message-date">Сегодня</div>
+
+							<div class="message customer">
+								<div class="message-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div class="message-content">
+									<div class="message-sender">Иван Иванов</div>
+									<div class="message-text">Здравствуйте! Когда будет готов предварительный отчет?
+									</div>
+									<div class="message-time">10:05</div>
+								</div>
+							</div>
+
+							<div class="message executor">
+								<div class="message-content">
+									<div class="message-text">Добрый день! Предварительный отчет будет готов к пятнице. Сейчас
+										завершаю проверку модуля аутентификации.</div>
+									<div class="message-time">10:06</div>
+								</div>
+							</div>
+
+							<div class="message executor">
+								<div class="message-content">
+									<div class="message-text">Пока что обнаружил несколько minor issues, но ничего
+										критичного. Детали будут в отчете.</div>
+									<div class="message-time">10:07</div>
+								</div>
+							</div>
+
+							<div class="message customer">
+								<div class="message-avatar">
+									<i class="fas fa-user"></i>
+								</div>
+								<div class="message-content">
+									<div class="message-sender">Иван Иванов</div>
+									<div class="message-text">Хорошо, жду отчет. Нужно ли предоставить дополнительную
+										информацию?</div>
+									<div class="message-time">10:10</div>
+								</div>
+							</div>
+
+							<div class="message executor">
+								<div class="message-content">
+									<div class="message-text">Пока всё есть. Если понадобится что-то дополнительно, я
+										свяжусь с вами.</div>
+									<div class="message-time">10:11</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="customer-chat-input">
+							<div class="chat-tools">
+								<button class="tool-btn" id="attachFileBtn">
+									<i class="fas fa-paperclip"></i>
+								</button>
+								<button class="tool-btn">
+									<i class="fas fa-code"></i>
+								</button>
+								<button class="tool-btn">
+									<i class="fas fa-image"></i>
+								</button>
+							</div>
+							<input type="text" class="chat-input" id="chatInput" placeholder="Введите ваше сообщение...">
+							<button class="send-button" id="sendMessageBtn">
+								<i class="fas fa-paper-plane"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- Информация о проекте -->
+					<div class="project-sidebar">
+						<div class="project-info">
+							<h4>Информация о проекте</h4>
+							<div class="project-details">
+								<div class="detail-item">
+									<strong>Проект:</strong>
+									<span>Анализ кода на уязвимости</span>
+								</div>
+								<div class="detail-item">
+									<strong>Статус:</strong>
+									<span class="status in-progress">В работе</span>
+								</div>
+								<div class="detail-item">
+									<strong>Срок сдачи:</strong>
+									<span>19 января 2026</span>
+								</div>
+								<div class="detail-item">
+									<strong>Бюджет:</strong>
+									<span>35 000 ₽</span>
+								</div>
+								<div class="detail-item">
+									<strong>Прогресс:</strong>
+									<div class="progress-bar">
+										<div class="progress-fill" style="width: 65%"></div>
+									</div>
+									<span>65%</span>
+								</div>
+							</div>
+
+							<div class="project-files">
+								<h5>Прикрепленные файлы</h5>
+								<div class="file-list">
+									<div class="file-item">
+										<i class="fas fa-file-pdf"></i>
+										<div class="file-info">
+											<div class="file-name">ТЗ_проекта.pdf</div>
+											<div class="file-size">2.4 MB</div>
+										</div>
+									</div>
+									<div class="file-item">
+										<i class="fas fa-file-code"></i>
+										<div class="file-info">
+											<div class="file-name">access_control.py</div>
+											<div class="file-size">156 KB</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/script.js"></script>
+	<script src="../js/customer-chat.js"></script>
+</body>
+
+</html>

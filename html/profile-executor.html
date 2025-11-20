@@ -4,16 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Профиль пользователя - SoSI</title>
+	<title>Профиль исполнителя - SoSI</title>
 	<link rel="icon" type="image/x-icon" href="../favicon.ico">
-	<link rel="stylesheet" href="../css/styles.css">
-	<link rel="stylesheet" href="../css/profile.css">
+	<!-- <link rel="stylesheet" href="../css/styles.css"> -->
+	<link rel="stylesheet" href="../css/profile-executor.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 	<!-- Навигация -->
-	<nav>
+	<!-- <nav>
 		<div class="nav-container">
 			<div class="logo">
 				<i class="fas fa-shield-alt"></i>
@@ -24,19 +24,19 @@
 				<li><a href="services.html" class="nav-link">Услуги</a></li>
 				<li><a href="reviews.html" class="nav-link">Отзывы</a></li>
 				<li><a href="support.html" class="nav-link">Техподдержка</a></li>
-				<li><a href="executor-chat.html" class="nav-link">Чат с исполнителем</a></li>
-				<li><a href="profile.html" class="nav-link active">Профиль</a></li>
+				<li><a href="customer-chat.html" class="nav-link">Чат с заказчиком</a></li>
+				<li><a href="profile-executor.html" class="nav-link active">Профиль</a></li>
 				<li><a href="login.html" class="nav-link">Выход</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav> -->
 
 	<div class="main-content">
 		<div class="page active">
 			<div class="container">
 				<div class="profile-header">
-					<h1>Профиль пользователя</h1>
-					<p>Управление вашими данными и заказами</p>
+					<h1>Профиль исполнителя</h1>
+					<p>Управление вашими проектами и настройками</p>
 				</div>
 
 				<div class="profile-layout">
@@ -45,7 +45,7 @@
 						<div class="user-card">
 							<div class="avatar-container">
 								<div class="avatar" id="userAvatar">
-									<i class="fas fa-user"></i>
+									<i class="fas fa-user-tie"></i>
 								</div>
 								<button class="avatar-upload-btn" id="avatarUploadBtn">
 									<i class="fas fa-camera"></i>
@@ -53,15 +53,15 @@
 								<input type="file" id="avatarInput" accept="image/*" style="display: none;">
 							</div>
 							<div class="user-info">
-								<h3 id="userName">Иван Иванов</h3>
-								<p class="user-email" id="userEmail">ivan@example.com</p>
+								<h3 id="userName">Алексей Петров</h3>
+								<p class="user-email" id="userEmail">executor@example.com</p>
 								<div class="user-stats">
 									<div class="stat-item">
-										<span class="stat-number" id="activeOrdersCount">3</span>
-										<span class="stat-label">Активных заказа</span>
+										<span class="stat-number" id="activeProjectsCount">2</span>
+										<span class="stat-label">Активных проекта</span>
 									</div>
 									<div class="stat-item">
-										<span class="stat-number" id="completedOrdersCount">7</span>
+										<span class="stat-number" id="completedProjectsCount">15</span>
 										<span class="stat-label">Завершено</span>
 									</div>
 								</div>
@@ -69,9 +69,9 @@
 						</div>
 
 						<nav class="profile-nav">
-							<button class="nav-btn active" data-tab="orders">
-								<i class="fas fa-list-alt"></i>
-								Мои заказы
+							<button class="nav-btn active" data-tab="projects">
+								<i class="fas fa-tasks"></i>
+								Активные проекты
 							</button>
 							<button class="nav-btn" data-tab="settings">
 								<i class="fas fa-cog"></i>
@@ -81,51 +81,55 @@
 								<i class="fas fa-shield-alt"></i>
 								Безопасность
 							</button>
-							<button class="nav-btn" data-tab="billing">
-								<i class="fas fa-credit-card"></i>
-								Платежи
+							<button class="nav-btn" data-tab="skills">
+								<i class="fas fa-graduation-cap"></i>
+								Навыки
 							</button>
 						</nav>
 					</div>
 
 					<!-- Основное содержимое -->
 					<div class="profile-content">
-						<!-- Вкладка заказов -->
-						<div class="tab-content active" id="orders-tab">
+						<!-- Вкладка проектов -->
+						<div class="tab-content active" id="projects-tab">
 							<div class="tab-header">
-								<h2>Мои заказы</h2>
-								<div class="order-filters">
+								<h2>Активные проекты</h2>
+								<div class="project-filters">
 									<button class="filter-btn active" data-filter="all">Все</button>
 									<button class="filter-btn" data-filter="active">Активные</button>
 									<button class="filter-btn" data-filter="completed">Завершенные</button>
 								</div>
 							</div>
 
-							<div class="orders-container">
-								<!-- Активные заказы -->
-								<div class="orders-section">
-									<h3>Текущие заказы</h3>
-									<div class="orders-grid" id="activeOrders">
-										<div class="order-card active">
-											<div class="order-header">
+							<div class="projects-container">
+								<!-- Активные проекты -->
+								<div class="projects-section">
+									<h3>Текущие проекты</h3>
+									<div class="projects-grid" id="activeProjects">
+										<div class="project-card active">
+											<div class="project-header">
 												<h4>Анализ кода на уязвимости</h4>
-												<span class="order-status in-progress">В работе</span>
+												<span class="project-status in-progress">В работе</span>
 											</div>
-											<div class="order-info">
-												<div class="order-detail">
-													<strong>Исполнитель:</strong>
-													<span>Алексей, специалист по безопасности</span>
+											<div class="project-info">
+												<div class="project-detail">
+													<strong>Заказчик:</strong>
+													<span>Иван Иванов, ООО "Рога и копыта"</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Начало:</strong>
 													<span>15 января 2024</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Срок сдачи:</strong>
 													<span>19 января 2024</span>
 												</div>
+												<div class="project-detail">
+													<strong>Бюджет:</strong>
+													<span>35 000 ₽</span>
+												</div>
 											</div>
-											<div class="order-progress">
+											<div class="project-progress">
 												<div class="progress-info">
 													<span>Прогресс:</span>
 													<span>65%</span>
@@ -134,38 +138,42 @@
 													<div class="progress-fill" style="width: 65%"></div>
 												</div>
 											</div>
-											<div class="order-actions">
-												<button class="action-btn primary">
+											<div class="project-actions">
+												<button class="action-btn primary" onclick="location.href='customer-chat.html'">
 													<i class="fas fa-comments"></i>
-													Чат с исполнителем
+													Чат с заказчиком
 												</button>
 												<button class="action-btn">
-													<i class="fas fa-info-circle"></i>
-													Детали
+													<i class="fas fa-edit"></i>
+													Обновить прогресс
 												</button>
 											</div>
 										</div>
 
-										<div class="order-card active">
-											<div class="order-header">
+										<div class="project-card active">
+											<div class="project-header">
 												<h4>Внешний пентест</h4>
-												<span class="order-status pending">Ожидает начала</span>
+												<span class="project-status pending">Ожидает начала</span>
 											</div>
-											<div class="order-info">
-												<div class="order-detail">
-													<strong>Исполнитель:</strong>
-													<span>Дмитрий, пентестер</span>
+											<div class="project-info">
+												<div class="project-detail">
+													<strong>Заказчик:</strong>
+													<span>Петр Сидоров, ИП "ТехноСити"</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Начало:</strong>
 													<span>20 января 2024</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Срок сдачи:</strong>
 													<span>25 января 2024</span>
 												</div>
+												<div class="project-detail">
+													<strong>Бюджет:</strong>
+													<span>75 000 ₽</span>
+												</div>
 											</div>
-											<div class="order-progress">
+											<div class="project-progress">
 												<div class="progress-info">
 													<span>Прогресс:</span>
 													<span>0%</span>
@@ -174,39 +182,39 @@
 													<div class="progress-fill" style="width: 0%"></div>
 												</div>
 											</div>
-											<div class="order-actions">
+											<div class="project-actions">
 												<button class="action-btn">
-													<i class="fas fa-edit"></i>
-													Изменить
+													<i class="fas fa-play"></i>
+													Начать работу
 												</button>
 												<button class="action-btn danger">
 													<i class="fas fa-times"></i>
-													Отменить
+													Отказаться
 												</button>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<!-- Завершенные заказы -->
-								<div class="orders-section">
-									<h3>Завершенные заказы</h3>
-									<div class="orders-grid" id="completedOrders">
-										<div class="order-card completed">
-											<div class="order-header">
+								<!-- Завершенные проекты -->
+								<div class="projects-section">
+									<h3>Завершенные проекты</h3>
+									<div class="projects-grid" id="completedProjects">
+										<div class="project-card completed">
+											<div class="project-header">
 												<h4>Аудит Wi-Fi сетей</h4>
-												<span class="order-status completed">Завершен</span>
+												<span class="project-status completed">Завершен</span>
 											</div>
-											<div class="order-info">
-												<div class="order-detail">
-													<strong>Исполнитель:</strong>
-													<span>Мария, аналитик кода</span>
+											<div class="project-info">
+												<div class="project-detail">
+													<strong>Заказчик:</strong>
+													<span>Мария Иванова, ООО "СейфНет"</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Период:</strong>
 													<span>5-12 января 2024</span>
 												</div>
-												<div class="order-detail">
+												<div class="project-detail">
 													<strong>Оценка:</strong>
 													<span class="rating">
 														<i class="fas fa-star"></i>
@@ -217,7 +225,7 @@
 													</span>
 												</div>
 											</div>
-											<div class="order-actions">
+											<div class="project-actions">
 												<button class="action-btn">
 													<i class="fas fa-download"></i>
 													Скачать отчет
@@ -245,20 +253,24 @@
 									<div class="form-row">
 										<div class="form-group">
 											<label for="firstName">Имя</label>
-											<input type="text" id="firstName" value="Иван" required>
+											<input type="text" id="firstName" value="Алексей" required>
 										</div>
 										<div class="form-group">
 											<label for="lastName">Фамилия</label>
-											<input type="text" id="lastName" value="Иванов" required>
+											<input type="text" id="lastName" value="Петров" required>
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="username">Имя пользователя</label>
-										<input type="text" id="username" value="ivanov" required>
+										<label for="specialization">Специализация</label>
+										<input type="text" id="specialization" value="Специалист по безопасности">
+									</div>
+									<div class="form-group">
+										<label for="experience">Опыт работы</label>
+										<input type="text" id="experience" value="5 лет">
 									</div>
 									<div class="form-group">
 										<label for="phone">Телефон</label>
-										<input type="tel" id="phone" value="+7 (900) 123-45-67">
+										<input type="tel" id="phone" value="+7 (900) 987-65-43">
 									</div>
 								</div>
 
@@ -273,12 +285,12 @@
 										<label class="checkbox-label">
 											<input type="checkbox" checked>
 											<span class="checkmark"></span>
-											Уведомления о статусе заказа
+											Уведомления о новых проектах
 										</label>
 										<label class="checkbox-label">
 											<input type="checkbox">
 											<span class="checkmark"></span>
-											Новости и акции
+											Новости и обновления
 										</label>
 									</div>
 								</div>
@@ -297,6 +309,24 @@
 							</div>
 
 							<div class="security-settings">
+								<div class="security-section">
+									<h3>Смена данных аккаунта</h3>
+									<form class="account-form" id="accountForm">
+										<div class="form-group">
+											<label for="username">Имя пользователя</label>
+											<input type="text" id="username" value="executor" required>
+										</div>
+										<div class="form-group">
+											<label for="email">Email</label>
+											<input type="email" id="email" value="executor@example.com" required>
+										</div>
+										<button type="submit" class="save-btn">
+											<i class="fas fa-user-edit"></i>
+											Обновить данные
+										</button>
+									</form>
+								</div>
+
 								<div class="security-section">
 									<h3>Смена пароля</h3>
 									<form class="password-form" id="passwordForm">
@@ -335,60 +365,82 @@
 										<button class="enable-2fa-btn">
 											<i class="fas fa-shield-alt"></i>
 											Включить 2FA
-										</button>
+											</button>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Вкладка платежей -->
-						<div class="tab-content" id="billing-tab">
+						<!-- Вкладка навыков -->
+						<div class="tab-content" id="skills-tab">
 							<div class="tab-header">
-								<h2>Платежи и счета</h2>
+								<h2>Навыки и специализация</h2>
 							</div>
 
-							<div class="billing-content">
-								<div class="billing-section">
-									<h3>История платежей</h3>
-									<div class="payment-history">
-										<div class="payment-item">
-											<div class="payment-info">
-												<div class="payment-service">Анализ кода на уязвимости</div>
-												<div class="payment-date">15 января 2024</div>
+							<div class="skills-content">
+								<div class="skills-section">
+									<h3>Основные навыки</h3>
+									<div class="skills-grid">
+										<div class="skill-item">
+											<div class="skill-info">
+												<span class="skill-name">Анализ кода на уязвимости</span>
+												<div class="skill-level">
+													<div class="skill-bar">
+														<div class="skill-fill" style="width: 90%"></div>
+													</div>
+													<span class="skill-percent">90%</span>
+												</div>
 											</div>
-											<div class="payment-amount">35 000 ₽</div>
-											<div class="payment-status paid">Оплачен</div>
 										</div>
-										<div class="payment-item">
-											<div class="payment-info">
-												<div class="payment-service">Внешний пентест</div>
-												<div class="payment-date">10 января 2024</div>
+										<div class="skill-item">
+											<div class="skill-info">
+												<span class="skill-name">Внешний пентест</span>
+												<div class="skill-level">
+													<div class="skill-bar">
+														<div class="skill-fill" style="width: 85%"></div>
+													</div>
+													<span class="skill-percent">85%</span>
+												</div>
 											</div>
-											<div class="payment-amount">75 000 ₽</div>
-											<div class="payment-status paid">Оплачен</div>
+										</div>
+										<div class="skill-item">
+											<div class="skill-info">
+												<span class="skill-name">Аудит Wi-Fi сетей</span>
+												<div class="skill-level">
+													<div class="skill-bar">
+														<div class="skill-fill" style="width: 75%"></div>
+													</div>
+													<span class="skill-percent">75%</span>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 
-								<div class="billing-section">
-									<h3>Способы оплаты</h3>
-									<div class="payment-methods">
-										<div class="payment-method">
-											<div class="method-icon">
-												<i class="fas fa-credit-card"></i>
+								<div class="skills-section">
+									<h3>Сертификаты</h3>
+									<div class="certificates-list">
+										<div class="certificate-item">
+											<i class="fas fa-certificate"></i>
+											<div class="certificate-info">
+												<div class="certificate-name">OSCP (Offensive Security Certified Professional)</div>
+												<div class="certificate-date">Выдан: 2023</div>
 											</div>
-											<div class="method-info">
-												<div class="method-name">Банковская карта •••• 1234</div>
-												<div class="method-type">Visa</div>
+										</div>
+										<div class="certificate-item">
+											<i class="fas fa-certificate"></i>
+											<div class="certificate-info">
+												<div class="certificate-name">CEH (Certified Ethical Hacker)</div>
+												<div class="certificate-date">Выдан: 2022</div>
 											</div>
-											<button class="method-action">Изменить</button>
 										</div>
 									</div>
-									<button class="add-payment-btn">
-										<i class="fas fa-plus"></i>
-										Добавить способ оплаты
-									</button>
 								</div>
+
+								<button class="save-btn">
+									<i class="fas fa-plus"></i>
+									Добавить навык
+								</button>
 							</div>
 						</div>
 					</div>
@@ -398,7 +450,7 @@
 	</div>
 
 	<script src="../js/script.js"></script>
-	<script src="../js/profile.js"></script>
+	<script src="../js/profile-executor.js"></script>
 </body>
 
 </html>

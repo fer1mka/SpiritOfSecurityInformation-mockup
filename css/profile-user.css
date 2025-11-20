@@ -1,4 +1,4 @@
-/* Стили для страницы профиля */
+/* Стили для страницы профиля заказчика */
 .profile-header {
 	text-align: center;
 	margin-bottom: 40px;
@@ -17,7 +17,7 @@
 
 .profile-layout {
 	display: grid;
-	grid-template-columns: 300px 1fr;
+	grid-template-columns: 320px 1fr;
 	gap: 30px;
 	align-items: start;
 }
@@ -30,13 +30,88 @@
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 	position: sticky;
 	top: 20px;
+	display: flex;
+	flex-direction: column;
 }
 
+/* Принудительный порядок элементов */
 .user-card {
 	text-align: center;
-	margin-bottom: 25px;
-	padding-bottom: 25px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
 	border-bottom: 1px solid #eee;
+	order: 1; /* Первый элемент */
+}
+
+.user-stats {
+	display: flex;
+	justify-content: space-around;
+	gap: 15px;
+	margin-bottom: 25px;
+	order: 2; /* Второй элемент */
+}
+
+.stat-item {
+	text-align: center;
+}
+
+.stat-number {
+	display: block;
+	font-size: 24px;
+	font-weight: bold;
+	color: #3498db;
+	margin-bottom: 5px;
+}
+
+.stat-label {
+	font-size: 12px;
+	color: #666;
+}
+
+/* Навигационные клавиши - ПОСЛЕ статистики */
+.profile-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	order: 3; /* Третий элемент */
+}
+
+.nav-btn {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 15px;
+	background: none;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
+	text-align: left;
+	color: #666;
+	font-size: 14px;
+	position: relative;
+}
+
+.nav-btn:hover {
+	background: #f8f9fa;
+	transform: translateX(5px);
+}
+
+.nav-btn.active {
+	background: #3498db;
+	color: white;
+	box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.nav-btn i {
+	width: 20px;
+	text-align: center;
+	font-size: 16px;
+}
+
+.nav-text {
+	flex: 1;
+	font-weight: 500;
 }
 
 .avatar-container {
@@ -88,64 +163,6 @@
 .user-email {
 	color: #666;
 	margin-bottom: 15px;
-}
-
-.user-stats {
-	display: flex;
-	justify-content: space-around;
-	gap: 15px;
-}
-
-.stat-item {
-	text-align: center;
-}
-
-.stat-number {
-	display: block;
-	font-size: 24px;
-	font-weight: bold;
-	color: #3498db;
-	margin-bottom: 5px;
-}
-
-.stat-label {
-	font-size: 12px;
-	color: #666;
-}
-
-.profile-nav {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-.nav-btn {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 12px 15px;
-	background: none;
-	border: none;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: background 0.3s;
-	text-align: left;
-	color: #666;
-	font-size: 14px;
-}
-
-.nav-btn:hover {
-	background: #f8f9fa;
-}
-
-.nav-btn.active {
-	background: #3498db;
-	color: white;
-}
-
-.nav-btn i {
-	width: 20px;
-	text-align: center;
 }
 
 /* Основное содержимое профиля */
@@ -341,8 +358,7 @@
 }
 
 /* Формы */
-.settings-form,
-.password-form {
+.settings-form, .password-form, .account-form {
 	max-width: 600px;
 }
 
@@ -649,6 +665,27 @@
 	color: #3498db;
 }
 
+/* Анимации для навигации */
+@keyframes navSlideIn {
+	from {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.nav-btn {
+	animation: navSlideIn 0.3s ease;
+}
+
+.nav-btn:nth-child(1) { animation-delay: 0.1s; }
+.nav-btn:nth-child(2) { animation-delay: 0.2s; }
+.nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.nav-btn:nth-child(4) { animation-delay: 0.4s; }
+
 /* Адаптивность */
 @media (max-width: 768px) {
 	.profile-layout {
@@ -658,6 +695,10 @@
 
 	.profile-sidebar {
 		position: static;
+	}
+
+	.nav-btn:hover {
+		transform: none;
 	}
 
 	.tab-header {
@@ -699,419 +740,5 @@
 
 	.order-filters {
 		flex-wrap: wrap;
-	}
-}
-
-/* Стили для страницы профиля */
-.profile-header {
-	text-align: center;
-	margin-bottom: 40px;
-}
-
-.profile-header h1 {
-	font-size: 36px;
-	color: #2c3e50;
-	margin-bottom: 10px;
-}
-
-.profile-header p {
-	color: #666;
-	font-size: 18px;
-}
-
-.profile-layout {
-	display: grid;
-	grid-template-columns: 320px 1fr;
-	gap: 30px;
-	align-items: start;
-}
-
-/* Боковая панель профиля */
-.profile-sidebar {
-	background: white;
-	border-radius: 12px;
-	padding: 25px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-	position: sticky;
-	top: 20px;
-}
-
-.user-card {
-	text-align: center;
-	margin-bottom: 25px;
-	padding-bottom: 25px;
-	border-bottom: 1px solid #eee;
-}
-
-.avatar-container {
-	position: relative;
-	display: inline-block;
-	margin-bottom: 15px;
-}
-
-.avatar {
-	width: 100px;
-	height: 100px;
-	background: linear-gradient(135deg, #3498db, #8B5FBF);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: white;
-	font-size: 36px;
-	margin: 0 auto;
-}
-
-.avatar-upload-btn {
-	position: absolute;
-	bottom: 5px;
-	right: 5px;
-	width: 32px;
-	height: 32px;
-	background: #3498db;
-	border: 3px solid white;
-	border-radius: 50%;
-	color: white;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background 0.3s;
-}
-
-.avatar-upload-btn:hover {
-	background: #2980b9;
-}
-
-.user-info h3 {
-	color: #2c3e50;
-	margin-bottom: 5px;
-	font-size: 20px;
-}
-
-.user-email {
-	color: #666;
-	margin-bottom: 15px;
-}
-
-.user-stats {
-	display: flex;
-	justify-content: space-around;
-	gap: 15px;
-}
-
-.stat-item {
-	text-align: center;
-}
-
-.stat-number {
-	display: block;
-	font-size: 24px;
-	font-weight: bold;
-	color: #3498db;
-	margin-bottom: 5px;
-}
-
-.stat-label {
-	font-size: 12px;
-	color: #666;
-}
-
-/* Навигационные клавиши */
-.profile-nav {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	margin-bottom: 25px;
-}
-
-.nav-btn {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 12px 15px;
-	background: none;
-	border: none;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: all 0.3s;
-	text-align: left;
-	color: #666;
-	font-size: 14px;
-	position: relative;
-}
-
-.nav-btn:hover {
-	background: #f8f9fa;
-	transform: translateX(5px);
-}
-
-.nav-btn.active {
-	background: #3498db;
-	color: white;
-	box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
-}
-
-.nav-btn i {
-	width: 20px;
-	text-align: center;
-	font-size: 16px;
-}
-
-.nav-text {
-	flex: 1;
-	font-weight: 500;
-}
-
-.nav-badge {
-	background: #e74c3c;
-	color: white;
-	border-radius: 12px;
-	padding: 2px 8px;
-	font-size: 11px;
-	font-weight: 600;
-	min-width: 20px;
-	text-align: center;
-}
-
-.security-indicator {
-	color: #e74c3c;
-	font-size: 12px;
-}
-
-.nav-btn.active .security-indicator {
-	color: rgba(255, 255, 255, 0.8);
-}
-
-/* Информация о заказах */
-.orders-info {
-	background: #f8f9fa;
-	border-radius: 8px;
-	padding: 20px;
-	border-left: 4px solid #3498db;
-}
-
-.orders-info h4 {
-	color: #2c3e50;
-	margin-bottom: 15px;
-	font-size: 16px;
-	font-weight: 600;
-}
-
-.orders-stats {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	margin-bottom: 15px;
-}
-
-.order-stat-item {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 10px;
-	background: white;
-	border-radius: 6px;
-	transition: transform 0.2s;
-}
-
-.order-stat-item:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.stat-icon {
-	width: 32px;
-	height: 32px;
-	border-radius: 6px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: white;
-	font-size: 14px;
-}
-
-.stat-icon.in-progress {
-	background: #3498db;
-}
-
-.stat-icon.pending {
-	background: #f39c12;
-}
-
-.stat-icon.completed {
-	background: #2ecc71;
-}
-
-.stat-details {
-	flex: 1;
-}
-
-.stat-count {
-	display: block;
-	font-weight: bold;
-	color: #2c3e50;
-	font-size: 16px;
-}
-
-.stat-label {
-	display: block;
-	font-size: 12px;
-	color: #666;
-	margin-top: 2px;
-}
-
-.orders-summary {
-	border-top: 1px solid #e9ecef;
-	padding-top: 15px;
-}
-
-.summary-item {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 8px;
-	font-size: 14px;
-}
-
-.summary-item:last-child {
-	margin-bottom: 0;
-}
-
-.summary-item span {
-	color: #666;
-}
-
-.summary-item strong {
-	color: #2c3e50;
-	font-weight: 600;
-}
-
-/* Основное содержимое профиля */
-.profile-content {
-	background: white;
-	border-radius: 12px;
-	padding: 30px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.tab-content {
-	display: none;
-}
-
-.tab-content.active {
-	display: block;
-}
-
-.tab-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 30px;
-	padding-bottom: 15px;
-	border-bottom: 1px solid #eee;
-}
-
-.tab-header h2 {
-	color: #2c3e50;
-	font-size: 24px;
-}
-
-.order-filters {
-	display: flex;
-	gap: 10px;
-}
-
-.filter-btn {
-	padding: 8px 16px;
-	border: 1px solid #ddd;
-	background: white;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: all 0.3s;
-	font-size: 13px;
-}
-
-.filter-btn.active {
-	background: #3498db;
-	color: white;
-	border-color: #3498db;
-}
-
-/* Анимации для навигации */
-@keyframes navSlideIn {
-	from {
-		opacity: 0;
-		transform: translateX(-10px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-.nav-btn {
-	animation: navSlideIn 0.3s ease;
-}
-
-.nav-btn:nth-child(1) {
-	animation-delay: 0.1s;
-}
-
-.nav-btn:nth-child(2) {
-	animation-delay: 0.2s;
-}
-
-.nav-btn:nth-child(3) {
-	animation-delay: 0.3s;
-}
-
-.nav-btn:nth-child(4) {
-	animation-delay: 0.4s;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-	.profile-layout {
-		grid-template-columns: 1fr;
-		gap: 20px;
-	}
-
-	.profile-sidebar {
-		position: static;
-	}
-
-	.nav-btn:hover {
-		transform: none;
-	}
-
-	.orders-stats {
-		grid-template-columns: 1fr;
-	}
-
-	.tab-header {
-		flex-direction: column;
-		gap: 15px;
-		align-items: flex-start;
-	}
-}
-
-@media (max-width: 480px) {
-	.profile-content {
-		padding: 20px;
-	}
-
-	.user-stats {
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.order-filters {
-		flex-wrap: wrap;
-	}
-
-	.orders-info {
-		padding: 15px;
 	}
 }

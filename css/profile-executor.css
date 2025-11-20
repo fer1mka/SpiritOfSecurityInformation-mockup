@@ -1,0 +1,716 @@
+/* Стили для страницы профиля исполнителя */
+.profile-header {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.profile-header h1 {
+	font-size: 36px;
+	color: #2c3e50;
+	margin-bottom: 10px;
+}
+
+.profile-header p {
+	color: #666;
+	font-size: 18px;
+}
+
+.profile-layout {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	gap: 30px;
+	align-items: start;
+}
+
+/* Боковая панель профиля */
+.profile-sidebar {
+	background: white;
+	border-radius: 12px;
+	padding: 25px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+	position: sticky;
+	top: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Принудительный порядок элементов */
+.user-card {
+	text-align: center;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	order: 1; /* Первый элемент */
+}
+
+.user-stats {
+	display: flex;
+	justify-content: space-around;
+	gap: 15px;
+	margin-bottom: 25px;
+	order: 2; /* Второй элемент */
+}
+
+.stat-item {
+	text-align: center;
+}
+
+.stat-number {
+	display: block;
+	font-size: 24px;
+	font-weight: bold;
+	color: #27ae60;
+	margin-bottom: 5px;
+}
+
+.stat-label {
+	font-size: 12px;
+	color: #666;
+}
+
+/* Навигационные клавиши - ПОСЛЕ статистики */
+.profile-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	order: 3; /* Третий элемент */
+}
+
+.nav-btn {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 15px;
+	background: none;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
+	text-align: left;
+	color: #666;
+	font-size: 14px;
+	position: relative;
+}
+
+.nav-btn:hover {
+	background: #f8f9fa;
+	transform: translateX(5px);
+}
+
+.nav-btn.active {
+	background: #27ae60;
+	color: white;
+	box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.nav-btn i {
+	width: 20px;
+	text-align: center;
+	font-size: 16px;
+}
+
+.nav-text {
+	flex: 1;
+	font-weight: 500;
+}
+
+.avatar-container {
+	position: relative;
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.avatar {
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(135deg, #27ae60, #2ecc71);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 36px;
+	margin: 0 auto;
+}
+
+.avatar-upload-btn {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	width: 32px;
+	height: 32px;
+	background: #27ae60;
+	border: 3px solid white;
+	border-radius: 50%;
+	color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.3s;
+}
+
+.avatar-upload-btn:hover {
+	background: #219653;
+}
+
+.user-info h3 {
+	color: #2c3e50;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
+.user-email {
+	color: #666;
+	margin-bottom: 15px;
+}
+
+/* Остальные стили остаются без изменений... */
+
+/* Основное содержимое профиля */
+.profile-content {
+	background: white;
+	border-radius: 12px;
+	padding: 30px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tab-content {
+	display: none;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+.tab-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.tab-header h2 {
+	color: #2c3e50;
+	font-size: 24px;
+}
+
+.project-filters {
+	display: flex;
+	gap: 10px;
+}
+
+.filter-btn {
+	padding: 8px 16px;
+	border: 1px solid #ddd;
+	background: white;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.3s;
+	font-size: 13px;
+}
+
+.filter-btn.active {
+	background: #27ae60;
+	color: white;
+	border-color: #27ae60;
+}
+
+/* Карточки проектов */
+.projects-section {
+	margin-bottom: 40px;
+}
+
+.projects-section h3 {
+	color: #2c3e50;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.projects-grid {
+	display: grid;
+	gap: 20px;
+}
+
+.project-card {
+	border: 1px solid #eee;
+	border-radius: 8px;
+	padding: 20px;
+	transition: box-shadow 0.3s;
+}
+
+.project-card:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 15px;
+}
+
+.project-header h4 {
+	color: #2c3e50;
+	margin: 0;
+	font-size: 16px;
+}
+
+.project-status {
+	padding: 4px 8px;
+	border-radius: 12px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.project-status.in-progress {
+	background: #fff3cd;
+	color: #856404;
+}
+
+.project-status.pending {
+	background: #e2e3e5;
+	color: #383d41;
+}
+
+.project-status.completed {
+	background: #d1ecf1;
+	color: #0c5460;
+}
+
+.project-info {
+	margin-bottom: 15px;
+}
+
+.project-detail {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+	font-size: 14px;
+}
+
+.project-detail strong {
+	color: #2c3e50;
+}
+
+.rating {
+	color: #f39c12;
+}
+
+.project-progress {
+	margin-bottom: 15px;
+}
+
+.progress-info {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+	font-size: 13px;
+	color: #666;
+}
+
+.progress-bar {
+	height: 6px;
+	background: #f0f0f0;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.progress-fill {
+	height: 100%;
+	background: #27ae60;
+	border-radius: 3px;
+	transition: width 0.3s ease;
+}
+
+.project-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.action-btn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	background: white;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s;
+	font-size: 13px;
+}
+
+.action-btn.primary {
+	background: #27ae60;
+	color: white;
+	border-color: #27ae60;
+}
+
+.action-btn.danger {
+	background: #e74c3c;
+	color: white;
+	border-color: #e74c3c;
+}
+
+.action-btn:hover {
+	transform: translateY(-1px);
+}
+
+/* Формы */
+.settings-form, .password-form, .account-form {
+	max-width: 600px;
+}
+
+.form-section {
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.form-section h3 {
+	color: #2c3e50;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 8px;
+	color: #2c3e50;
+	font-weight: 500;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 12px 15px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 14px;
+	transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+	outline: none;
+	border-color: #27ae60;
+	box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.1);
+}
+
+.checkbox-group {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.checkbox-label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.checkbox-label input {
+	display: none;
+}
+
+.checkmark {
+	width: 18px;
+	height: 18px;
+	border: 2px solid #ddd;
+	border-radius: 3px;
+	position: relative;
+	transition: all 0.3s;
+}
+
+.checkbox-label input:checked+.checkmark {
+	background: #27ae60;
+	border-color: #27ae60;
+}
+
+.checkbox-label input:checked+.checkmark::after {
+	content: '✓';
+	position: absolute;
+	color: white;
+	font-size: 12px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.save-btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 25px;
+	background: #27ae60;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.3s;
+	font-size: 14px;
+}
+
+.save-btn:hover {
+	background: #219653;
+}
+
+/* Настройки безопасности */
+.security-settings {
+	max-width: 600px;
+}
+
+.security-section {
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.security-section h3 {
+	color: #2c3e50;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.password-strength {
+	margin-top: 8px;
+}
+
+.strength-bar {
+	height: 4px;
+	background: #f0f0f0;
+	border-radius: 2px;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+
+.strength-text {
+	font-size: 12px;
+	color: #666;
+}
+
+.two-factor {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.two-factor-info p {
+	margin: 0 0 10px 0;
+	color: #666;
+}
+
+.two-factor-status .status-off {
+	color: #e74c3c;
+	font-weight: 500;
+}
+
+.enable-2fa-btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background: #2c3e50;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.enable-2fa-btn:hover {
+	background: #34495e;
+}
+
+/* Навыки */
+.skills-content {
+	max-width: 800px;
+}
+
+.skills-section {
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.skills-section h3 {
+	color: #2c3e50;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.skills-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.skill-item {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 15px;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.skill-info {
+	flex: 1;
+}
+
+.skill-name {
+	display: block;
+	font-weight: 500;
+	color: #2c3e50;
+	margin-bottom: 8px;
+}
+
+.skill-level {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.skill-bar {
+	flex: 1;
+	height: 6px;
+	background: #e0e0e0;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.skill-fill {
+	height: 100%;
+	background: #27ae60;
+	border-radius: 3px;
+	transition: width 0.3s ease;
+}
+
+.skill-percent {
+	font-size: 12px;
+	color: #666;
+	min-width: 35px;
+}
+
+.certificates-list {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.certificate-item {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 15px;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.certificate-item i {
+	color: #27ae60;
+	font-size: 20px;
+}
+
+.certificate-info {
+	flex: 1;
+}
+
+.certificate-name {
+	font-weight: 500;
+	color: #2c3e50;
+	margin-bottom: 4px;
+}
+
+.certificate-date {
+	font-size: 12px;
+	color: #666;
+}
+
+/* Анимации для навигации */
+@keyframes navSlideIn {
+	from {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.nav-btn {
+	animation: navSlideIn 0.3s ease;
+}
+
+.nav-btn:nth-child(1) { animation-delay: 0.1s; }
+.nav-btn:nth-child(2) { animation-delay: 0.2s; }
+.nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.nav-btn:nth-child(4) { animation-delay: 0.4s; }
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.profile-layout {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.profile-sidebar {
+		position: static;
+	}
+
+	.nav-btn:hover {
+		transform: none;
+	}
+
+	.tab-header {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+	}
+
+	.project-actions {
+		flex-direction: column;
+	}
+
+	.two-factor {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+}
+
+@media (max-width: 480px) {
+	.profile-content {
+		padding: 20px;
+	}
+
+	.user-stats {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.project-filters {
+		flex-wrap: wrap;
+	}
+}
